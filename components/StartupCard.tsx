@@ -5,12 +5,19 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity.types";
 
-
-export type StartupCardType = Omit<Startup, "author"> & {author?: Author};
+export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: StartupCardType }) => {
-  const { _id, title, description, image, views, category, author, _createdAt } =
-    post;
+  const {
+    _id,
+    title,
+    description,
+    image,
+    views,
+    category,
+    author,
+    _createdAt,
+  } = post;
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -34,25 +41,39 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
           </Link>
         </div>
         <Link href={`/user/${author?._id}`}>
-          <Image
-            src={author?.image}
-            width={48}
-            height={48}
-            alt={author?.name}
-            className="rounded-full"
-          />
+          {author?.image ? (
+            <Image
+              src={author.image}
+              width={48}
+              height={48}
+              alt={author?.name || "Author"}
+              className="rounded-full"
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-gray-200" />
+          )}
         </Link>
       </div>
       <Link href={`/startup/${_id}`}>
         <p className="startup_card_desc">{description}</p>
-        <img src={image} alt={title} className="startup-card_img" />
+        {image ? (
+            <Image
+              src={image}
+              width={48}
+              height={48}
+              alt={title || "image"}
+              className="rounded-full"
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-gray-200" />
+          )}
       </Link>
-      <div className="flex-between gap-3 mt-5">
+      <div className="mt-auto flex-between gap-3 pt-4">
         <Link href={`/?query=${category}`}>
           <p className="text-16-medium">{category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
-            <Link href={`/startup/${_id}`}>Details</Link>
+          <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
       </div>
     </li>

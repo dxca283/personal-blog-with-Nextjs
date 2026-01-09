@@ -16,14 +16,13 @@ import StartupCard, { StartupCardType } from "@/components/StartupCard";
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
-  const [post, {select: editorPost}] = await Promise.all([
+  const [post, { select: editorPost }] = await Promise.all([
     client.fetch(STARTUP_BY_ID_QUERY, { id }),
     client.fetch(PLAYLIST_BY_SLUG_QUERY, {
       slug: "edittor-picks",
     }),
   ]);
 
-  
   if (!post) return notFound();
 
   return (
@@ -37,8 +36,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <img
           src={post.image}
           alt="thumbnail"
-          className="w-full h-auto rounded-xl"
+          className="w-full max-w-4xl mx-auto h-[320px] object-contain rounded-xl"
         />
+
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <div className="flex-between gap-5">
             <Link href={`/users/${post.author.id}`}>
