@@ -214,7 +214,7 @@
   }
 
   .startup-card_img {
-    @apply w-full h-[164px] object-contain bg-white-100 rounded-[10px];
+    @apply w-full h-[164px] rounded-[10px] object-cover object-center;
   }
 
   .startup-card_btn {

@@ -59,10 +59,10 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         {image ? (
             <Image
               src={image}
-              width={48}
-              height={48}
+              width={164}
+              height={164}
               alt={title || "image"}
-              className="rounded-full"
+              className="startup-card_img"
             />
           ) : (
             <div className="w-12 h-12 rounded-full bg-gray-200" />
